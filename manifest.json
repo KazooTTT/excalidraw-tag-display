@@ -1,11 +1,10 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
+	"id": "excalidraw-tag-display",
+	"name": "Excalidraw Tag Display",
 	"version": "1.0.0",
 	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"description": "Displays an 'excalidraw' tag next to .excalidraw files in the file explorer.",
+	"author": "KazooTTT",
+	"authorUrl": "https://github.com/KazooTTT",
 	"isDesktopOnly": false
 }
