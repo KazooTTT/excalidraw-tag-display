@@ -33,7 +33,6 @@ export default class MyPlugin extends Plugin {
 		fileExplorers.forEach((fileExplorer) => {
 			this.logger.log("File explorer view:", fileExplorer.view);
 			const fileItems = (fileExplorer.view as any).fileItems;
-			this.logger.log("Raw fileItems:", fileItems);
 			this.logger.log("File items keys:", Object.keys(fileItems).length);
 
 			for (const path in fileItems) {
