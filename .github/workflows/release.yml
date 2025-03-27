@@ -33,7 +33,7 @@ jobs:
                   sed -i 's/version: "[^"]*"/version: "${{ steps.get_version.outputs.VERSION }}"/' manifest.json
 
             - name: Build and zip extensions
-              run: bun run zip:all
+              run: bun run build
 
             - name: Generate changelog
               run: bunx changelogithub
