@@ -1,0 +1,50 @@
+name: Release
+
+permissions:
+    id-token: write
+    contents: write
+
+on:
+    push:
+        tags:
+            - "v*"
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Get version from tag
+              id: get_version
+              run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+            - uses: oven-sh/setup-bun@v1
+              with:
+                  bun-version: latest
+
+            - name: Install dependencies
+              run: bun install
+
+            - name: Update version in manifest
+              run: |
+                  sed -i 's/version: "[^"]*"/version: "${{ steps.get_version.outputs.VERSION }}"/' manifest.json
+
+            - name: Build and zip extensions
+              run: bun run zip:all
+
+            - name: Generate changelog
+              run: bunx changelogithub
+              env:
+                  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+            - name: Upload release artifacts
+              uses: softprops/action-gh-release@v1
+              with:
+                  files: |
+                      ./main.js
+                      ./manifest.json
+              env:
+                  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
