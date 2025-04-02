@@ -1,6 +1,6 @@
-import { Plugin } from "obsidian";
+import { App, Plugin, PluginManifest } from "obsidian";
 
-class Logger {
+class ExcalidrawTagLogger {
 	private pluginName: string;
 
 	constructor(pluginName: string) {
@@ -16,12 +16,12 @@ class Logger {
 	}
 }
 
-export default class MyPlugin extends Plugin {
-	private logger: Logger;
+export default class ExcalidrawTagDisplayPlugin extends Plugin {
+	private logger: ExcalidrawTagLogger;
 
-	constructor(app: any, manifest: any) {
+	constructor(app: App, manifest: PluginManifest) {
 		super(app, manifest);
-		this.logger = new Logger("Excalidraw Tag Display");
+		this.logger = new ExcalidrawTagLogger("Excalidraw Tag Display");
 	}
 
 	addExcalidrawTags = () => {
